@@ -14,16 +14,38 @@ public class Cinema {
         System.out.println("Enter the number of seats in each row:");
         int column = scanner.nextInt();
         char[][] seats = new char[row][column];
-        makingCinemaRoom(column, seats);
-        makingTicket(row, column, seats);
+
+        for (char[] row1: seats)
+            Arrays.fill(row1, 'S');
+
+        boolean exit = true;
+        do {
+            System.out.println("1. Show the seats\n2. Buy a ticket\n0. Exit\n");
+            int input = scanner.nextInt();
+
+            switch(input) {
+                case 1:
+                    makingCinemaRoom(column, seats);
+                    break;
+                case 2:
+                    makingTicket(row, column, seats);
+                    break;
+                case 0:
+                    exit = false;
+                    break;
+                default:
+                    System.out.println("There is no such option");
+                    break;
+            }
+        } while (exit);
+
     }
 
     public static void makingCinemaRoom(int column, char[][] seats) {
 
         System.out.println("Cinema:");
 
-        for (char[] row: seats)
-            Arrays.fill(row, 'S');
+
         System.out.print("  ");
 
         for (int rn = 1; rn <= column; rn++) {                 // rn = row numbers
